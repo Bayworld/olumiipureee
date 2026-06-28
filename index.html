@@ -1,0 +1,442 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --aqua:#00c2d4;--aqua2:#00a0b5;--navy:#08213d;--navy2:#0c2f57;
+  --bg:#ffffff;--bg2:#f5f9ff;--bg3:#eaf3fc;
+  --text1:#08213d;--text2:#3a5a7a;--text3:#7a9db8;
+  --border:#d5e8f5;--card:#ffffff;--card-b:#daeaf8;
+  --footer:#040f1e;
+  --toggle-track:#dde8f2;--toggle-thumb:#08213d;
+}
+[data-theme=dark]{
+  --bg:#070f1a;--bg2:#0b1826;--bg3:#0f2035;
+  --text1:#e6f2fb;--text2:#88b0cc;--text3:#4a7090;
+  --border:#142338;--card:#0b1826;--card-b:#142338;
+  --toggle-track:#142338;--toggle-thumb:#00c2d4;
+}
+.w{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text1);transition:background .3s,color .3s;}
+
+/* ANNOUNCEMENT BAR */
+.bar{background:var(--navy);color:rgba(255,255,255,.75);text-align:center;font-size:12px;padding:.5rem 1rem;letter-spacing:.03em;}
+[data-theme=dark] .bar{background:#020810;}
+.bar strong{color:var(--aqua);}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 3rem;background:rgba(255,255,255,.92);border-bottom:.5px solid var(--border);position:sticky;top:0;z-index:200;backdrop-filter:blur(16px);}
+[data-theme=dark] .nav{background:rgba(7,15,26,.92);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-.2px;}
+[data-theme=dark] .logo{color:var(--text1);}
+.logo-dot{color:var(--aqua);}
+.nav-links{display:flex;gap:2.2rem;list-style:none;}
+.nav-links a{text-decoration:none;font-size:13px;font-weight:500;color:var(--text2);transition:color .2s;}
+.nav-links a:hover{color:var(--aqua);}
+.nav-r{display:flex;align-items:center;gap:1.2rem;}
+.toggle-wrap{display:flex;align-items:center;gap:.5rem;cursor:pointer;user-select:none;}
+.t-icon{font-size:15px;}
+.toggle{width:42px;height:23px;border-radius:50px;background:var(--toggle-track);position:relative;border:.5px solid var(--border);transition:background .3s;cursor:pointer;}
+.t-knob{width:17px;height:17px;border-radius:50%;background:var(--toggle-thumb);position:absolute;top:2px;left:2px;transition:left .25s,background .3s;}
+[data-theme=dark] .t-knob{left:21px;}
+.nav-btn{background:var(--navy);color:#fff;padding:.55rem 1.3rem;border-radius:50px;font-size:13px;font-weight:600;border:none;cursor:pointer;letter-spacing:.01em;transition:background .2s;}
+[data-theme=dark] .nav-btn{background:var(--aqua);color:var(--navy);}
+.nav-btn:hover{background:var(--aqua);color:var(--navy);}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:92vh;
+  background:linear-gradient(160deg,#040e1c 0%,#081e38 30%,#0b2f58 60%,#0c3d72 85%,#0d4a88 100%);
+  display:grid;
+  grid-template-columns:1fr 1.1fr 1fr;
+  align-items:center;
+  padding:0 3rem;
+  position:relative;
+  overflow:hidden;
+}
+/* ambient light blobs */
+.blob{position:absolute;border-radius:50%;pointer-events:none;}
+.blob1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,194,212,.1) 0%,transparent 65%);top:-150px;right:-100px;}
+.blob2{width:400px;height:400px;background:radial-gradient(circle,rgba(0,120,200,.08) 0%,transparent 65%);bottom:-80px;left:0;}
+.blob3{width:200px;height:200px;background:radial-gradient(circle,rgba(0,194,212,.07) 0%,transparent 65%);top:40%;left:25%;}
+
+/* LEFT */
+.h-left{z-index:3;padding:4rem 0;}
+.h-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,194,212,.12);border:.5px solid rgba(0,194,212,.25);border-radius:50px;padding:.35rem .9rem;margin-bottom:1.5rem;}
+.h-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--aqua);}
+.h-pill-txt{font-size:11px;font-weight:600;letter-spacing:.15em;color:var(--aqua);text-transform:uppercase;}
+.h-title{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:#fff;line-height:1.08;margin-bottom:1.3rem;}
+.h-title em{font-style:italic;color:var(--aqua);display:block;}
+.h-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.62);line-height:1.8;max-width:370px;margin-bottom:2.2rem;}
+.h-btns{display:flex;gap:.9rem;}
+.btn-main{background:var(--aqua);color:#08213d;padding:.8rem 1.9rem;border-radius:50px;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;letter-spacing:.01em;}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,194,212,.4);}
+.btn-sec{background:rgba(255,255,255,.07);color:#fff;padding:.8rem 1.9rem;border-radius:50px;font-size:14px;font-weight:500;border:1px solid rgba(255,255,255,.22);cursor:pointer;transition:border-color .2s,background .2s;}
+.btn-sec:hover{border-color:var(--aqua);background:rgba(0,194,212,.1);}
+
+/* CENTRE BOTTLE */
+.h-centre{z-index:3;display:flex;justify-content:center;align-items:flex-end;height:92vh;}
+.bottle-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;height:100%;}
+/* glow under bottle */
+.bottle-glow{position:absolute;bottom:60px;left:50%;transform:translateX(-50%);width:220px;height:60px;background:radial-gradient(ellipse,rgba(0,194,212,.35) 0%,transparent 70%);border-radius:50%;filter:blur(8px);}
+.bottle-img{
+  height:90vh;
+  max-height:740px;
+  width:auto;
+  object-fit:contain;
+  mix-blend-mode:lighten;
+  animation:floatY 5s ease-in-out infinite;
+  position:relative;z-index:2;
+  margin-bottom:30px;
+}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+
+/* RIGHT STATS */
+.h-right{z-index:3;display:flex;flex-direction:column;gap:1rem;padding:4rem 0;}
+.stat-card{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);border-radius:16px;padding:1.2rem 1.5rem;backdrop-filter:blur(8px);transition:background .2s,border-color .2s;}
+.stat-card:hover{background:rgba(255,255,255,.1);border-color:rgba(0,194,212,.35);}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--aqua);line-height:1;}
+.stat-label{font-size:13px;color:rgba(255,255,255,.65);margin-top:4px;font-weight:400;}
+.stat-sub{font-size:11px;color:rgba(255,255,255,.32);margin-top:2px;}
+
+/* TRUST STRIP */
+.trust{background:rgba(0,194,212,.08);border-top:.5px solid rgba(0,194,212,.15);border-bottom:.5px solid rgba(0,194,212,.15);padding:.9rem 3rem;display:flex;gap:2.5rem;align-items:center;flex-wrap:wrap;}
+[data-theme=dark] .trust{background:#0b1826;}
+.ti{display:flex;align-items:center;gap:.5rem;font-size:12px;font-weight:500;color:var(--aqua2);}
+[data-theme=dark] .ti{color:var(--aqua);}
+.ti-c{width:18px;height:18px;border-radius:50%;background:var(--aqua);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#08213d;flex-shrink:0;}
+
+/* SECTIONS */
+.sec{padding:5rem 3rem;}
+.ey{display:flex;align-items:center;gap:.6rem;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--aqua);margin-bottom:.7rem;}
+.ey-line{width:24px;height:1.5px;background:var(--aqua);}
+.st{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--text1);line-height:1.12;margin-bottom:.7rem;}
+.ss{font-size:15px;color:var(--text2);line-height:1.75;max-width:520px;margin-bottom:3rem;}
+
+/* PRODUCTS */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.pc{background:var(--card);border-radius:20px;padding:2.2rem;border:.5px solid var(--card-b);position:relative;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.pc:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,80,160,.1);}
+[data-theme=dark] .pc:hover{box-shadow:0 16px 48px rgba(0,0,0,.4);}
+.pc-bar{position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0;}
+.p1 .pc-bar{background:linear-gradient(90deg,var(--aqua),#00e5f5);}
+.p2 .pc-bar{background:linear-gradient(90deg,#1055a0,#3580cc);}
+.p3 .pc-bar{background:linear-gradient(90deg,#1a7a3c,#2eb05a);}
+.pc-ico{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:1.3rem;}
+.p1 .pc-ico{background:linear-gradient(135deg,#caf0f8,#e8faff);}
+.p2 .pc-ico{background:linear-gradient(135deg,#dceeff,#eef6ff);}
+.p3 .pc-ico{background:linear-gradient(135deg,#d8f5e3,#edfff4);}
+[data-theme=dark] .p1 .pc-ico{background:rgba(0,194,212,.12);}
+[data-theme=dark] .p2 .pc-ico{background:rgba(16,85,160,.18);}
+[data-theme=dark] .p3 .pc-ico{background:rgba(26,122,60,.15);}
+.pc-badge{display:inline-flex;padding:.25rem .75rem;border-radius:50px;font-size:10.5px;font-weight:700;background:#e6fafc;color:#008a9e;margin-bottom:.8rem;}
+[data-theme=dark] .pc-badge{background:rgba(0,194,212,.15);color:var(--aqua);}
+.pc-t{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--text1);margin-bottom:.6rem;}
+.pc-d{font-size:13.5px;color:var(--text2);line-height:1.7;margin-bottom:1.3rem;}
+.pc-lk{font-size:13px;font-weight:700;color:var(--aqua);display:flex;align-items:center;gap:.3rem;}
+.arr{display:inline-block;transition:transform .2s;}
+.pc:hover .arr{transform:translateX(4px);}
+
+/* ABOUT BAND */
+.about{background:linear-gradient(135deg,#061422 0%,#08213d 60%,#0b2f58 100%);padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.a-ey{color:var(--aqua);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.7rem;}
+.a-t{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:.9rem;}
+.a-s{font-size:14.5px;color:rgba(255,255,255,.57);line-height:1.8;max-width:420px;margin-bottom:2rem;}
+.a-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;}
+.a-fact{background:rgba(255,255,255,.05);border:.5px solid rgba(255,255,255,.1);border-radius:16px;padding:1.3rem;transition:background .2s;}
+.a-fact:hover{background:rgba(0,194,212,.07);}
+.a-fn{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--aqua);}
+.a-fl{font-size:12px;color:rgba(255,255,255,.4);margin-top:3px;}
+
+/* PROCESS */
+.proc{background:var(--bg2);}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem;margin-top:.5rem;}
+.step{background:var(--card);border-radius:16px;padding:1.8rem 1.4rem;border:.5px solid var(--card-b);text-align:center;transition:transform .2s,box-shadow .2s;}
+.step:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,80,160,.08);}
+.sn{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;box-shadow:0 0 0 5px var(--bg2);}
+[data-theme=dark] .sn{background:var(--aqua);color:var(--navy);box-shadow:0 0 0 5px var(--bg2);}
+.st2{font-size:14.5px;font-weight:600;color:var(--text1);margin-bottom:.5rem;}
+.sd{font-size:13px;color:var(--text2);line-height:1.65;}
+
+/* CERTS */
+.certs{padding:2.5rem 3rem;display:flex;justify-content:space-evenly;align-items:center;flex-wrap:wrap;gap:1.5rem;border-top:.5px solid var(--border);border-bottom:.5px solid var(--border);}
+.cert{text-align:center;}
+.cert-b{width:64px;height:64px;border-radius:50%;background:var(--bg3);border:2px solid rgba(0,194,212,.3);display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;font-size:26px;transition:border-color .2s;}
+.cert:hover .cert-b{border-color:var(--aqua);}
+.cert-n{font-size:12.5px;font-weight:600;color:var(--text1);}
+.cert-d{font-size:11px;color:var(--text3);}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.cf{background:var(--card);border-radius:20px;padding:2.2rem;border:.5px solid var(--card-b);}
+.cf-t{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--text1);margin-bottom:1.5rem;}
+.fr{margin-bottom:1rem;}
+.fl{font-size:12px;font-weight:600;color:var(--text3);margin-bottom:.4rem;display:block;}
+.fi,.fsl,.fta{width:100%;padding:.7rem 1rem;border-radius:10px;border:.5px solid var(--card-b);background:var(--bg2);color:var(--text1);font-size:13.5px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
+.fi:focus,.fsl:focus,.fta:focus{border-color:var(--aqua);}
+.fta{min-height:95px;resize:vertical;}
+.fsub{width:100%;background:var(--navy);color:#fff;padding:.85rem;border-radius:50px;font-size:14px;font-weight:700;border:none;cursor:pointer;margin-top:.4rem;transition:background .2s;}
+[data-theme=dark] .fsub{background:var(--aqua);color:var(--navy);}
+.fsub:hover{background:var(--aqua);color:var(--navy);}
+.ci-list{display:flex;flex-direction:column;gap:1rem;}
+.ci-hd{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--text1);margin-bottom:.5rem;}
+.ci-s{font-size:14.5px;color:var(--text2);line-height:1.75;margin-bottom:1.2rem;}
+.ci{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--card);border-radius:14px;border:.5px solid var(--card-b);}
+.ci-ico{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#caf0f8,#e8faff);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+[data-theme=dark] .ci-ico{background:rgba(0,194,212,.12);}
+.ci-lbl{font-size:11px;font-weight:600;color:var(--text3);}
+.ci-val{font-size:14px;font-weight:500;color:var(--text1);}
+
+/* CTA BANNER */
+.cta{background:linear-gradient(130deg,var(--aqua) 0%,#0090a8 100%);padding:4rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;}
+.cta-t{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--navy);margin-bottom:.4rem;}
+.cta-s{font-size:14.5px;color:rgba(8,33,61,.65);}
+.cta-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-dk{background:var(--navy);color:#fff;padding:.85rem 2.1rem;border-radius:50px;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:transform .15s;}
+.btn-dk:hover{transform:translateY(-2px);}
+.btn-wh{background:#fff;color:var(--navy);padding:.85rem 2.1rem;border-radius:50px;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:transform .15s;}
+.btn-wh:hover{transform:translateY(-2px);}
+
+/* FOOTER */
+.footer{background:var(--footer);padding:3.5rem 3rem 1.5rem;}
+.ft{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+.f-brand{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:#fff;margin-bottom:.7rem;}
+.f-brand span{color:var(--aqua);}
+.f-tag{font-size:12.5px;color:rgba(255,255,255,.3);line-height:1.65;max-width:220px;}
+.f-ht{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem;}
+.f-links{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.f-links a{text-decoration:none;font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.f-links a:hover{color:var(--aqua);}
+.fb{border-top:.5px solid rgba(255,255,255,.07);padding-top:1.3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.f-copy{font-size:11.5px;color:rgba(255,255,255,.2);}
+.f-tags{display:flex;gap:.7rem;}
+.f-tag2{font-size:10.5px;color:rgba(255,255,255,.28);background:rgba(255,255,255,.05);padding:.3rem .75rem;border-radius:50px;border:.5px solid rgba(255,255,255,.08);}
+
+/* MOBILE BLOCK */
+.mobile-block{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:linear-gradient(160deg,#040e1c 0%,#081e38 60%,#0b2f58 100%);
+  z-index:9999;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+  text-align:center;
+}
+.mobile-block-icon{font-size:48px;margin-bottom:1.2rem;}
+.mobile-block-title{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:700;
+  color:#ffffff;margin-bottom:.8rem;
+}
+.mobile-block-title span{color:#00c2d4;}
+.mobile-block-sub{
+  font-size:14px;color:rgba(255,255,255,.6);
+  line-height:1.75;max-width:280px;margin-bottom:1.8rem;
+}
+.mobile-block-badge{
+  background:rgba(0,194,212,.12);
+  border:.5px solid rgba(0,194,212,.3);
+  border-radius:50px;padding:.5rem 1.2rem;
+  font-size:12px;font-weight:600;
+  color:#00c2d4;letter-spacing:.05em;
+}
+
+@media(max-width:1024px){
+  .mobile-block{display:flex;}
+  .w{overflow:hidden;height:100vh;}
+}
+</style>
+
+<div class="w" id="site" data-theme="light">
+
+  <div class="mobile-block">
+  <div class="mobile-block-icon">🖥️</div>
+  <div class="mobile-block-title">Best viewed on <span>desktop</span></div>
+  <p class="mobile-block-sub">OlumilliPure's website is optimised for desktop browsers. Please visit us on a laptop or desktop computer for the full experience.</p>
+  <div class="mobile-block-badge">Please switch to desktop</div>
+</div>
+
+<!-- ANNOUNCEMENT -->
+<div class="bar">Free delivery for orders of 50 packs and above &nbsp;·&nbsp; <strong>Call: +234 810 000 1111</strong></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="logo">Olumilli<span class="logo-dot">Pure</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Machinery</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-r">
+    <div class="toggle-wrap" onclick="toggleTheme()">
+      <span class="t-icon" id="t-ico">☀️</span>
+      <div class="toggle"><div class="t-knob"></div></div>
+    </div>
+    <button class="nav-btn">Order Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <div class="h-left">
+    <div class="h-pill"><span class="h-pill-dot"></span><span class="h-pill-txt">NAFDAC Certified · SON Approved</span></div>
+    <h1 class="h-title">Purity you can<br><em>taste in every</em><br>single drop</h1>
+    <p class="h-sub">OlumilliPure delivers premium sachet and bottled water through 7-stage purification — plus complete water factory setup for businesses across Nigeria.</p>
+    <div class="h-btns">
+      <button class="btn-main">Order Water</button>
+      <button class="btn-sec">Setup Your Factory</button>
+    </div>
+  </div>
+
+  <div class="h-centre">
+    <div class="bottle-stage">
+      <div class="bottle-glow"></div>
+      <img src="olumii pure.png" class="bottle-img" alt="OlumilliPure 75cl Natural Mineral Water bottle" />
+    </div>
+  </div>
+
+  <div class="h-right">
+    <div class="stat-card">
+      <div class="stat-num">5M+</div>
+      <div class="stat-label">Sachets monthly</div>
+      <div class="stat-sub">Consistent supply chain</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">7-Stage</div>
+      <div class="stat-label">Purification process</div>
+      <div class="stat-sub">RO + UV sterilised</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">NAFDAC compliant</div>
+      <div class="stat-sub">SON MANCAP certified</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Quality monitoring</div>
+      <div class="stat-sub">Third-party lab tested</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="ti"><span class="ti-c">✓</span>NAFDAC Registered</div>
+  <div class="ti"><span class="ti-c">✓</span>SON Certified</div>
+  <div class="ti"><span class="ti-c">✓</span>Reverse Osmosis Filtered</div>
+  <div class="ti"><span class="ti-c">✓</span>UV Sterilised</div>
+  <div class="ti"><span class="ti-c">✓</span>GMP Standards</div>
+  <div class="ti"><span class="ti-c">✓</span>Free Delivery on 50+ packs</div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="sec" style="background:var(--bg);">
+  <div class="ey"><span class="ey-line"></span>Our Products</div>
+  <h2 class="st">Everything water,<br>one name you trust</h2>
+  <p class="ss">From daily hydration to setting up your own water production business — OlumilliPure is your complete water partner.</p>
+  <div class="pg">
+    <div class="pc p1"><div class="pc-bar"></div><div class="pc-ico">💧</div><div class="pc-badge">Most Popular</div><div class="pc-t">Sachet Water</div><p class="pc-d">Pure, hygienic, and affordable. Every sachet passes through 7 purification stages, heat-sealed for freshness. Available for retail, events, schools, and bulk distribution.</p><div class="pc-lk">Order sachets <span class="arr">→</span></div></div>
+    <div class="pc p2"><div class="pc-bar"></div><div class="pc-ico">🍶</div><div class="pc-t">Bottled Water</div><p class="pc-d">Premium table water in 50cl, 75cl, 1.5L, and 19L sizes. Ideal for homes, offices, hotels, hospitals, and events. Bulk pricing available.</p><div class="pc-lk">View all sizes <span class="arr">→</span></div></div>
+    <div class="pc p3"><div class="pc-bar"></div><div class="pc-ico">⚙️</div><div class="pc-t">Factory Setup</div><p class="pc-d">End-to-end water factory solutions — machinery supply, installation, staff training, NAFDAC registration support, and ongoing maintenance. Start your business right.</p><div class="pc-lk">Get a quote <span class="arr">→</span></div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div>
+    <div class="a-ey">About OlumilliPure</div>
+    <h2 class="a-t">Built on purity.<br>Trusted by thousands<br>across Nigeria.</h2>
+    <p class="a-s">From a pristine underground aquifer, through state-of-the-art filtration, to your hands — OlumilliPure takes every step with precision. You never need to question what's in your water.</p>
+    <button class="btn-main">Read our story</button>
+  </div>
+  <div class="a-grid">
+    <div class="a-fact"><div class="a-fn">2014</div><div class="a-fl">Year founded</div></div>
+    <div class="a-fact"><div class="a-fn">7-Stage</div><div class="a-fl">Purification</div></div>
+    <div class="a-fact"><div class="a-fn">19L</div><div class="a-fl">Largest bottle</div></div>
+    <div class="a-fact"><div class="a-fn">100%</div><div class="a-fl">NAFDAC compliant</div></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec proc">
+  <div class="ey"><span class="ey-line"></span>Our Process</div>
+  <h2 class="st">From the ground up</h2>
+  <p class="ss">Every drop of OlumilliPure passes through our complete purification journey before it reaches your hands.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="st2">Source extraction</div><p class="sd">Drawn from a certified underground aquifer — naturally low in contaminants from the start.</p></div>
+    <div class="step"><div class="sn">2</div><div class="st2">Multi-stage filtration</div><p class="sd">Sand, carbon, resin, and reverse osmosis remove all impurities, chlorine, and heavy metals.</p></div>
+    <div class="step"><div class="sn">3</div><div class="st2">UV sterilisation</div><p class="sd">Ultraviolet treatment eliminates any remaining microbial and bacterial contaminants.</p></div>
+    <div class="step"><div class="sn">4</div><div class="st2">Sealed & certified</div><p class="sd">Bottled under GMP standards, lab-tested, then NAFDAC and SON approved before distribution.</p></div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<div class="certs">
+  <div class="cert"><div class="cert-b">🏅</div><div class="cert-n">NAFDAC</div><div class="cert-d">Reg. No. C1-XXXX</div></div>
+  <div class="cert"><div class="cert-b">✅</div><div class="cert-n">SON MANCAP</div><div class="cert-d">Certified product</div></div>
+  <div class="cert"><div class="cert-b">🔬</div><div class="cert-n">Lab Tested</div><div class="cert-d">Third-party verified</div></div>
+  <div class="cert"><div class="cert-b">🏭</div><div class="cert-n">GMP Standards</div><div class="cert-d">Good Manufacturing Practice</div></div>
+  <div class="cert"><div class="cert-b">💧</div><div class="cert-n">WHO Guidelines</div><div class="cert-d">Water quality standards</div></div>
+</div>
+
+<!-- CONTACT -->
+<section class="sec" style="background:var(--bg2);">
+  <div class="ey"><span class="ey-line"></span>Get in Touch</div>
+  <h2 class="st">Let's talk water</h2>
+  <div class="contact-grid">
+    <div class="ci-list">
+      <div class="ci-s">Whether you're placing a retail order, sourcing for your business, or exploring a full water factory setup — our team is ready for you.</div>
+      <div class="ci"><div class="ci-ico">📞</div><div><div class="ci-lbl">Phone</div><div class="ci-val">+234 810 000 1111</div></div></div>
+      <div class="ci"><div class="ci-ico">✉️</div><div><div class="ci-lbl">Email</div><div class="ci-val">info@olumillipure.com</div></div></div>
+      <div class="ci"><div class="ci-ico">📍</div><div><div class="ci-lbl">Location</div><div class="ci-val">Lagos, Nigeria</div></div></div>
+      <div class="ci"><div class="ci-ico">🕐</div><div><div class="ci-lbl">Hours</div><div class="ci-val">Monday – Saturday: 8am – 5pm</div></div></div>
+    </div>
+    <div class="cf">
+      <div class="cf-t">Send a message</div>
+      <div class="fr"><label class="fl">Full name</label><input class="fi" type="text" placeholder="Your full name" /></div>
+      <div class="fr"><label class="fl">Email address</label><input class="fi" type="email" placeholder="you@email.com" /></div>
+      <div class="fr"><label class="fl">Enquiry type</label><select class="fsl"><option>Retail order — sachet water</option><option>Retail order — bottled water</option><option>Bulk / distribution</option><option>Water factory setup</option><option>Other</option></select></div>
+      <div class="fr"><label class="fl">Message</label><textarea class="fta" placeholder="Tell us what you need..."></textarea></div>
+      <button class="fsub">Send message</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <div><div class="cta-t">Ready to order or start your water business?</div><div class="cta-s">Retail, bulk supply, distributorships, or a complete factory setup — we do it all.</div></div>
+  <div class="cta-btns"><button class="btn-dk">Place an order</button><button class="btn-wh">Factory setup enquiry</button></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft">
+    <div><div class="f-brand">Olumilli<span>Pure</span></div><p class="f-tag">Pure. Refreshing. Life. Premium water solutions for homes, businesses, and entrepreneurs across Nigeria.</p></div>
+    <div><div class="f-ht">Products</div><ul class="f-links"><li><a href="#">Sachet water</a></li><li><a href="#">50cl bottles</a></li><li><a href="#">75cl bottles</a></li><li><a href="#">1.5L bottles</a></li><li><a href="#">19L dispenser</a></li></ul></div>
+    <div><div class="f-ht">Business</div><ul class="f-links"><li><a href="#">Factory setup</a></li><li><a href="#">Distributorship</a></li><li><a href="#">Machinery</a></li><li><a href="#">Bulk orders</a></li></ul></div>
+    <div><div class="f-ht">Company</div><ul class="f-links"><li><a href="#">About us</a></li><li><a href="#">Certifications</a></li><li><a href="#">Our process</a></li><li><a href="#">Contact</a></li></ul></div>
+  </div>
+  <div class="fb">
+    <div class="f-copy">© 2026 OlumilliPure. All rights reserved.</div>
+    <div class="f-tags"><span class="f-tag2">NAFDAC Certified</span><span class="f-tag2">SON MANCAP</span><span class="f-tag2">GMP Compliant</span></div>
+  </div>
+</footer>
+</div>
+
+<script>
+function toggleTheme(){
+  var s=document.getElementById('site');
+  var ico=document.getElementById('t-ico');
+  var dark=s.getAttribute('data-theme')==='dark';
+  s.setAttribute('data-theme',dark?'light':'dark');
+  ico.textContent=dark?'☀️':'🌙';
+}
+</script>
